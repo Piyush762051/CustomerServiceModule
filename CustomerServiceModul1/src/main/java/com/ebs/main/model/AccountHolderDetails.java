@@ -2,6 +2,7 @@ package com.ebs.main.model;
 
 import java.util.Date;
 
+import com.ebs.main.enm.AccountHolderGender;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,7 +33,7 @@ public class AccountHolderDetails
  private Date accountHolderDateOfBirth;
  private int accountholderAge;
  @Enumerated(EnumType.STRING)
- private	String	accountHolderGender;  // MALE,FEMALE,OTHER
+ private	AccountHolderGender	accountHolderGender;  // MALE,FEMALE,OTHER
  @Lob
  @Column(length = 999999999)
  private	byte[]	accountHolderAdharCard;

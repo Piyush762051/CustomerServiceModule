@@ -1,6 +1,7 @@
 package com.ebs.main.model;
 
 import java.util.List;
+import java.util.Set;
 
 import com.ebs.main.enm.AccountStatus;
 import com.ebs.main.enm.AccountType;
@@ -23,10 +24,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 
-class AccountDetails 
+public class AccountDetails 
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private long accountNumber;	    //primary key(Long)
 	private static String bankName;	      
 	private static String branchIFSC_Code;	
@@ -43,7 +44,7 @@ class AccountDetails
 	private	AccountHolderDetails accountHolderDetails;	
 	
 	@OneToMany(cascade = CascadeType.MERGE.REMOVE.REFRESH.DETACH)
-	private TransactionDetails accountTransactionHistory;	
+	private Set<TransactionDetails> accountTransactionHistory;	
 	
 	@OneToOne(cascade = CascadeType.MERGE.REMOVE.REFRESH.DETACH)
 	private	ATMDetails atmDetails;	
