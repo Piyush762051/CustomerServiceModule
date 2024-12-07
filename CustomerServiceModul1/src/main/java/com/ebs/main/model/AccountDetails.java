@@ -42,13 +42,13 @@ class AccountDetails
 	@OneToOne(cascade = CascadeType.ALL)
 	private	AccountHolderDetails accountHolderDetails;	
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.MERGE.REMOVE.REFRESH.DETACH)
 	private TransactionDetails accountTransactionHistory;	
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE.REMOVE.REFRESH.DETACH)
 	private	ATMDetails atmDetails;	
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.MERGE.REMOVE.REFRESH.DETACH)
 	private List<ChequeBookDetails> chequeBooks;
 
 }
