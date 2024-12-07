@@ -30,7 +30,7 @@ public class AccountHolderDetails
  private String	accountHolderEmail;
  private String	accountHolderContactNumber;
  private Date accountHolderDateOfBirth;
- 
+ private int accountholderAge;
  @Enumerated(EnumType.STRING)
  private	String	accountHolderGender;  // MALE,FEMALE,OTHER
  @Lob
