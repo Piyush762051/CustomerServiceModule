@@ -16,5 +16,7 @@ public AccountHolderDetails saveAccount(String textData, MultipartFile fileAdhar
 public AccountHolderDetails onUpdateCustomerAccount(AccountHolderDetails acc_Details, int accId);
 
 
+public Iterable<AccountHolderDetails> getCustomerAccount();
+
 
 }

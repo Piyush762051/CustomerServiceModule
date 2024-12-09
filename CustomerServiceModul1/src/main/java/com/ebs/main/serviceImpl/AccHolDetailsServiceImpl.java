@@ -68,4 +68,11 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 		}
 
 	}
+
+	@Override
+	public Iterable<AccountHolderDetails> getCustomerAccount() 
+	{
+		
+		return accountHolderRepository.findAll();
+	}
 }
