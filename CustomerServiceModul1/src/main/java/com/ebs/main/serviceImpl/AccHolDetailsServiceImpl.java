@@ -1,5 +1,7 @@
 package com.ebs.main.serviceImpl;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ebs.main.exception.InvailedAgeException;
+import com.ebs.main.exception.InvalidAccountDetailsException;
 import com.ebs.main.model.AccountHolderDetails;
 import com.ebs.main.repository.AccountHolderRepository;
 import com.ebs.main.serviceI.AccHolDetailsServiceI;
@@ -33,5 +36,19 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 		throw new InvailedAgeException("User is age must be in the rang of 18 to 85");
 	}
 	
+	}
+
+	@Override
+	public AccountHolderDetails onUpdateCustomerAccount(AccountHolderDetails acc_Details, int accId) {
+	      
+		Optional<AccountHolderDetails> accRef = accountHolderRepository.findById(accId);
+		if(accRef.isPresent())
+		{
+			return accountHolderRepository.save(acc_Details);
+		}
+		else {
+			throw new InvalidAccountDetailsException("Given Account No is Not correct "+accId);
+		}
+		
 	}
 }
