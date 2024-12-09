@@ -6,5 +6,7 @@ public interface AccHolDetailsServiceI {
 
 public	AccountHolderDetails oncreatedAccountDetails(AccountHolderDetails accdetails);
 
+public Iterable<AccountHolderDetails> getCustomerAccount();
+
 
 }

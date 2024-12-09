@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.service.annotation.GetExchange;
 
 import com.ebs.main.model.AccountHolderDetails;
 import com.ebs.main.serviceI.AccHolDetailsServiceI;
@@ -22,9 +23,17 @@ public class AccountHolderDetailsController
 	@Autowired private AccHolDetailsServiceI accHolDetailsServiceI;
 
 	@PostMapping("/createAccount")
-	public ResponseEntity<AccountHolderDetails> oncreatedAccount(@RequestBody AccountHolderDetails accdetails )
+	public ResponseEntity<AccountHolderDetails> oncreatedAccount(@RequestBody AccountHolderDetails accdetails  )
 	{
 					AccountHolderDetails accDetailsRef = accHolDetailsServiceI.oncreatedAccountDetails(accdetails);
 					return new ResponseEntity<AccountHolderDetails>(accDetailsRef,HttpStatus.CREATED);
 	}
+	
+	@GetExchange("/overall-accountCustomer")
+	public ResponseEntity<Iterable<AccountHolderDetails>> ongetAccountDetails()
+	{
+			Iterable<AccountHolderDetails> accRef=accHolDetailsServiceI.getCustomerAccount();
+			return new ResponseEntity<Iterable<AccountHolderDetails>>(accRef,HttpStatus.ACCEPTED);
+	}
+	
 }
