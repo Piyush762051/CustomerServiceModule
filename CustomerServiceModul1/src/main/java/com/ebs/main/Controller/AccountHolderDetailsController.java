@@ -61,6 +61,12 @@ public class AccountHolderDetailsController
 			return new ResponseEntity<Iterable<AccountHolderDetails>>(accRef,HttpStatus.ACCEPTED);
 	}
 	
+	@GetMapping("/particular-accountCustomer")
+	public ResponseEntity<AccountHolderDetails> onsingleAccount(@PathVariable ("accountHolderId") int id)
+	{
+			AccountHolderDetails accRef	=accHolDetailsServiceI.onsingleAccount(id);
+			return new ResponseEntity<AccountHolderDetails>(accRef,HttpStatus.OK);
+	}
 }
 
 
