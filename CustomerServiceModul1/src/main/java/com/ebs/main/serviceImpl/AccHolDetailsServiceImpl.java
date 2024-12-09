@@ -1,7 +1,8 @@
 package com.ebs.main.serviceImpl;
 
-import java.io.IOException;
 
+import java.io.IOException;
+import java.util.Optional'
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ebs.main.exception.InvailedAgeException;
+import com.ebs.main.exception.InvalidAccountDetailsException;
 import com.ebs.main.model.AccountHolderDetails;
 import com.ebs.main.repository.AccountHolderRepository;
 import com.ebs.main.serviceI.AccHolDetailsServiceI;
@@ -25,20 +27,7 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 	
 	@Autowired AccountHolderRepository accountHolderRepository;
     @Autowired ObjectMapper objectMapper;
-	@Override
-	public AccountHolderDetails oncreatedAccountDetails(AccountHolderDetails accdetails) {
-		
-		if(accdetails.getAccountholderAge()>=18 && accdetails.getAccountholderAge()<=85)
-		{
-			AccountHolderDetails accRef= accountHolderRepository.save(accdetails);
-			return accRef;
-			
-	}
-	else {
-		throw new InvailedAgeException("User is age must be in the rang of 18 to 85");
-	}
-	
-	}
+
 
 	@Override
 	public AccountHolderDetails saveAccount(String textData, MultipartFile fileAdharcard, MultipartFile filePancard,
@@ -66,5 +55,17 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 		}
 		
 		return account;
+}
+	public AccountHolderDetails onUpdateCustomerAccount(AccountHolderDetails acc_Details, int accId) {
+	      
+		Optional<AccountHolderDetails> accRef = accountHolderRepository.findById(accId);
+		if(accRef.isPresent())
+		{
+			return accountHolderRepository.save(acc_Details);
+		}
+		else {
+			throw new InvalidAccountDetailsException("Given Account No is Not correct "+accId);
+		}
+
 	}
 }
