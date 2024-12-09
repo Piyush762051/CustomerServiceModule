@@ -2,7 +2,10 @@ package com.ebs.main.serviceImpl;
 
 
 import java.io.IOException;
-import java.util.Optional'
+import java.util.Optional;
+
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ebs.main.exception.InvailedAgeException;
+import com.ebs.main.exception.AccountNotFound;
+import com.ebs.main.exception.IDNumberNotFound;
 import com.ebs.main.exception.InvalidAccountDetailsException;
 import com.ebs.main.model.AccountHolderDetails;
 import com.ebs.main.repository.AccountHolderRepository;
@@ -75,4 +79,21 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 		
 		return accountHolderRepository.findAll();
 	}
+	@Override
+	public AccountHolderDetails onsingleAccount(int id) 
+	{
+		Optional<AccountHolderDetails> accReg = accountHolderRepository.findById(id);
+		
+		if (accReg.isPresent()) {
+			return accReg.get();
+		}
+		
+		else {
+			throw new IDNumberNotFound("Id Invaild"+id);
+		}
+	
+
+	}
+	
+	
 }

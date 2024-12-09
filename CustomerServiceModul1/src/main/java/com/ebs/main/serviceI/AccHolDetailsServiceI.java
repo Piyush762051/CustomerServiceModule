@@ -18,5 +18,7 @@ public AccountHolderDetails onUpdateCustomerAccount(AccountHolderDetails acc_Det
 
 public Iterable<AccountHolderDetails> getCustomerAccount();
 
+public AccountHolderDetails onsingleAccount(int id);
+
 
 }
