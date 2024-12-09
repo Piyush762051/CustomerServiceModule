@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ebs.main.model.AccountHolderDetails;
 import com.ebs.main.serviceI.AccHolDetailsServiceI;
@@ -23,13 +25,22 @@ public class AccountHolderDetailsController
 	
 	@Autowired private AccHolDetailsServiceI accHolDetailsServiceI;
 
-	@PostMapping("/createAccount")
-	public ResponseEntity<AccountHolderDetails> oncreatedAccount(@RequestBody AccountHolderDetails accdetails )
-	{
-					AccountHolderDetails accDetailsRef = accHolDetailsServiceI.oncreatedAccountDetails(accdetails);
-					return new ResponseEntity<AccountHolderDetails>(accDetailsRef,HttpStatus.CREATED);
-	}
 	
+
+	
+	
+	@PostMapping("/createAccountHolder")
+	public ResponseEntity<AccountHolderDetails> oncreateAccountCustomer(@RequestPart ("aData") String textData,
+			                                                           @RequestPart ("aAdharCard") MultipartFile fileAdharcard,
+			                                                           @RequestPart("aPanCard") MultipartFile filePancard,
+			                                                           @RequestPart ("aPhoto") MultipartFile filePhoto,
+			                                                           @RequestPart (value = "aJoinLetter", required = false) MultipartFile fileJoinLetter,
+			                                                           @RequestPart (value = "aSalarySlip",required = false) MultipartFile fileSalarySlip)
+	{
+		 AccountHolderDetails accountRef=accHolDetailsServiceI.saveAccount(textData,fileAdharcard,filePancard,filePhoto,fileJoinLetter,fileSalarySlip);
+		return new ResponseEntity<AccountHolderDetails>(accountRef, HttpStatus.CREATED);
+  }
+
 	@PutMapping("/update-Account/{accountHolderId}")
 	public ResponseEntity<AccountHolderDetails> onUpdateCustomerAccount(@RequestBody AccountHolderDetails acc_Details,
 			                                                                 @PathVariable ("accountHolderId")int accId)
@@ -37,6 +48,10 @@ public class AccountHolderDetailsController
 		AccountHolderDetails accRef=accHolDetailsServiceI.onUpdateCustomerAccount(acc_Details,accId);
 		
 		return new ResponseEntity<AccountHolderDetails>(accRef,HttpStatus.CREATED);
+
 		
 	}
 }
+
+
+
