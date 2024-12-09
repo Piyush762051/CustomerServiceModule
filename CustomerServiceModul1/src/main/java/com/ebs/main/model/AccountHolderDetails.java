@@ -3,6 +3,7 @@ package com.ebs.main.model;
 import java.util.Date;
 
 import com.ebs.main.enm.AccountHolderGender;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,7 +31,10 @@ public class AccountHolderDetails
  private String accountHolderAddress;
  private String	accountHolderEmail;
  private String	accountHolderContactNumber;
+ 
+@JsonFormat(pattern = "yyyy-mm-dd")
  private Date accountHolderDateOfBirth;
+
  private int accountholderAge;
  @Enumerated(EnumType.STRING)
  private	AccountHolderGender	accountHolderGender;  // MALE,FEMALE,OTHER
