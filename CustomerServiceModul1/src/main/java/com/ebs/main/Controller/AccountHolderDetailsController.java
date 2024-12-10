@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,17 +43,22 @@ public class AccountHolderDetailsController
 		 AccountHolderDetails accountRef=accHolDetailsServiceI.saveAccount(textData,fileAdharcard,filePancard,filePhoto,fileJoinLetter,fileSalarySlip);
 		return new ResponseEntity<AccountHolderDetails>(accountRef, HttpStatus.CREATED);
   }
-
+	
 	@PutMapping("/update-Account/{accountHolderId}")
-	public ResponseEntity<AccountHolderDetails> onUpdateCustomerAccount(@RequestBody AccountHolderDetails acc_Details,
-			                                                                 @PathVariable ("accountHolderId")int accId)
-	{  
-		AccountHolderDetails accRef=accHolDetailsServiceI.onUpdateCustomerAccount(acc_Details,accId);
-		
+	public ResponseEntity<AccountHolderDetails> onUpdateAccount(@RequestPart("aData") String textData,
+			                                                    @RequestPart("aAdharCard")MultipartFile fileAdharcard,
+			                                                    @RequestPart("aPanCard") MultipartFile filePancard,
+			                                                    @RequestPart ("aPhoto") MultipartFile filePhoto,
+			                                                    @RequestPart(value = "aJoinLetter",required = false)MultipartFile fileJoinLetter,
+			                                                    @RequestPart(value = "aSalarySlip",required = false)MultipartFile fileSalarySlip,
+			                                                    @PathVariable ("accountHolderId")int accId)
+	{
+		AccountHolderDetails accRef=accHolDetailsServiceI.onUpdateCustomerAccount(accId,textData,fileAdharcard,filePancard,filePhoto,fileJoinLetter,fileSalarySlip);
+		                            
 		return new ResponseEntity<AccountHolderDetails>(accRef,HttpStatus.CREATED);
-
-		
+	
 	}
+	
 	
 	@GetMapping("/overall-accountCustomer")
 	public ResponseEntity<Iterable<AccountHolderDetails>> ongetAccountDetails()
@@ -62,6 +67,12 @@ public class AccountHolderDetailsController
 			return new ResponseEntity<Iterable<AccountHolderDetails>>(accRef,HttpStatus.ACCEPTED);
 	}
 	
+	@GetMapping("/particular-accountCustomer")
+	public ResponseEntity<AccountHolderDetails> onsingleAccount(@PathVariable ("accountHolderId") int id)
+	{
+			AccountHolderDetails accRef	=accHolDetailsServiceI.onsingleAccount(id);
+			return new ResponseEntity<AccountHolderDetails>(accRef,HttpStatus.OK);
+	}
 }
 
 
