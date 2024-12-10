@@ -43,16 +43,45 @@ public class AccountHolderDetailsController
 		return new ResponseEntity<AccountHolderDetails>(accountRef, HttpStatus.CREATED);
   }
 
+//	@PutMapping("/update-Account/{accountHolderId}")
+//	public ResponseEntity<AccountHolderDetails> onUpdateCustomerAccount(@RequestBody AccountHolderDetails acc_Details,
+//			                                                                 @PathVariable ("accountHolderId")int accId)
+//	{  
+//		AccountHolderDetails accRef=accHolDetailsServiceI.onUpdateCustomerAccount(acc_Details,accId);
+//		
+//		return new ResponseEntity<AccountHolderDetails>(accRef,HttpStatus.CREATED);
+//
+//		
+//	}
+	
 	@PutMapping("/update-Account/{accountHolderId}")
-	public ResponseEntity<AccountHolderDetails> onUpdateCustomerAccount(@RequestBody AccountHolderDetails acc_Details,
-			                                                                 @PathVariable ("accountHolderId")int accId)
-	{  
-		AccountHolderDetails accRef=accHolDetailsServiceI.onUpdateCustomerAccount(acc_Details,accId);
-		
+	public ResponseEntity<AccountHolderDetails> onUpdateAccount(@RequestPart("aData") String textData,
+			                                                    @RequestPart("aAdharCard")MultipartFile fileAdharcard,
+			                                                    @RequestPart("aPanCard") MultipartFile filePancard,
+			                                                    @RequestPart ("aPhoto") MultipartFile filePhoto,
+			                                                    @RequestPart(value = "aJoinLetter",required = false)MultipartFile fileJoinLetter,
+			                                                    @RequestPart(value = "aSalarySlip",required = false)MultipartFile fileSalarySlip,
+			                                                    @PathVariable ("accountHolderId")int accId)
+	{
+		AccountHolderDetails accRef=accHolDetailsServiceI.onUpdateCustomerAccount(accId,textData,fileAdharcard,filePancard,filePhoto,fileJoinLetter,fileSalarySlip);
+		                            
 		return new ResponseEntity<AccountHolderDetails>(accRef,HttpStatus.CREATED);
-
-		
+	
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@GetMapping("/overall-accountCustomer")
 	public ResponseEntity<Iterable<AccountHolderDetails>> ongetAccountDetails()

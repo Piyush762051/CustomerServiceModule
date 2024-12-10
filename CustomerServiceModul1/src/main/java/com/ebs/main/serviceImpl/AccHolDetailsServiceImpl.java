@@ -60,18 +60,18 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 		
 		return account;
 }
-	public AccountHolderDetails onUpdateCustomerAccount(AccountHolderDetails acc_Details, int accId) {
-	      
-		Optional<AccountHolderDetails> accRef = accountHolderRepository.findById(accId);
-		if(accRef.isPresent())
-		{
-			return accountHolderRepository.save(acc_Details);
-		}
-		else {
-			throw new InvalidAccountDetailsException("Given Account No is Not correct "+accId);
-		}
-
-	}
+//	public AccountHolderDetails onUpdateCustomerAccount(AccountHolderDetails acc_Details, int accId) {
+//	      
+//		Optional<AccountHolderDetails> accRef = accountHolderRepository.findById(accId);
+//		if(accRef.isPresent())
+//		{
+//			return accountHolderRepository.save(acc_Details);
+//		}
+//		else {
+//			throw new InvalidAccountDetailsException("Given Account No is Not correct "+accId);
+//		}
+//
+//	}
 
 	@Override
 	public Iterable<AccountHolderDetails> getCustomerAccount() 
@@ -93,6 +93,36 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 		}
 	
 
+	}
+	@Override
+	public AccountHolderDetails onUpdateCustomerAccount(int accId, String textData, MultipartFile fileAdharcard,
+			MultipartFile filePancard, MultipartFile filePhoto, MultipartFile fileJoinLetter,
+			MultipartFile fileSalarySlip) {
+		Optional<AccountHolderDetails> accRef = accountHolderRepository.findById(accId);
+		AccountHolderDetails account=null;
+		if(accRef.isPresent())
+		try 
+		{
+			account=objectMapper.readValue(textData, AccountHolderDetails.class);
+			LOG.info(account.toString());
+			if(!fileAdharcard.isEmpty())account.setAccountHolderAdharCard(fileAdharcard.getBytes());
+			if(!filePancard.isEmpty())account.setAccountHolderPanCard(filePancard.getBytes());
+			if(!filePhoto.isEmpty())account.setAccountHolderPhoto(filePhoto.getBytes());
+			if(!fileJoinLetter.isEmpty())account.setAccountHolderJoiningLatter(fileJoinLetter.getBytes());
+			if(!fileSalarySlip.isEmpty())account.setAccountHolderSalarySlip(fileSalarySlip.getBytes());
+			
+			accountHolderRepository.save(account);
+		} catch (JsonProcessingException e)
+		{
+			  LOG.error("Wrong JSON passed..!");
+			// TODO: handle exception
+		}catch (IOException e) 
+		{
+		    LOG.error("File was not uploaded correctly");
+		}
+		
+		return account;
+		
 	}
 	
 	

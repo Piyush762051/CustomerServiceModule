@@ -13,12 +13,15 @@ public interface AccHolDetailsServiceI
 public AccountHolderDetails saveAccount(String textData, MultipartFile fileAdharcard, MultipartFile filePancard,
 		MultipartFile filePhoto, MultipartFile fileJoinLetter, MultipartFile fileSalarySlip);
 
-public AccountHolderDetails onUpdateCustomerAccount(AccountHolderDetails acc_Details, int accId);
+//public AccountHolderDetails onUpdateCustomerAccount(AccountHolderDetails acc_Details, int accId);
 
 
 public Iterable<AccountHolderDetails> getCustomerAccount();
 
 public AccountHolderDetails onsingleAccount(int id);
+
+public AccountHolderDetails onUpdateCustomerAccount(int accId, String textData, MultipartFile fileAdharcard,
+		MultipartFile filePancard, MultipartFile filePhoto, MultipartFile fileJoinLetter, MultipartFile fileSalarySlip);
 
 
 }
