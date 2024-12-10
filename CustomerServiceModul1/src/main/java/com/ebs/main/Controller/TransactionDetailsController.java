@@ -21,12 +21,7 @@ public class TransactionDetailsController
 	@Autowired private TransDetailsServiceI transDetailsServiceI;
 	
 	
-	@PostMapping("/createRecord")
-	public ResponseEntity<TransactionDetails> oncreatedRecord(@RequestBody TransactionDetails tranDetails)
-	{
-		TransactionDetails traDetails = transDetailsServiceI.onCreatTransactionDetails(tranDetails);
-		return new ResponseEntity<TransactionDetails>(traDetails,org.springframework.http.HttpStatus.CREATED);
-	}
+	
 	
 
 }

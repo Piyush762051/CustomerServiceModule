@@ -1,5 +1,7 @@
 package com.ebs.main;
 
+import java.util.Random;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -27,4 +29,10 @@ private static final Logger LOG=LoggerFactory.getLogger(CustomerServiceModul1App
 		ObjectMapper obj1=new ObjectMapper();
 		return obj1;
 	}
+	@Bean
+	private Random createRandom()
+	{
+		return new Random();
+	}
+
 }

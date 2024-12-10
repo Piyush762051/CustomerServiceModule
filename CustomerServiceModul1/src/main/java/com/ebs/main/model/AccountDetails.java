@@ -27,7 +27,6 @@ import lombok.NoArgsConstructor;
 public class AccountDetails 
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long accountNumber;	    //primary key(Long)
 	private static String bankName;	      
 	private static String branchIFSC_Code;	
