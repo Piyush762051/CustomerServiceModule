@@ -2,6 +2,8 @@ package com.ebs.main.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +23,7 @@ public class ATMDetails
     
 	private long atmNumber;	//random  primary Key Long
 	private String	atmHolderName;
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date atmValidUpto;	
 	private int	atmcveCode;	//utility class
 

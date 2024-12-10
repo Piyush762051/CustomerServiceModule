@@ -2,16 +2,16 @@ package com.ebs.main.serviceImpl;
 
 
 import java.io.IOException;
-import java.util.Optional'
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ebs.main.exception.InvailedAgeException;
+
 import com.ebs.main.exception.InvalidAccountDetailsException;
 import com.ebs.main.model.AccountHolderDetails;
 import com.ebs.main.repository.AccountHolderRepository;
@@ -45,10 +45,12 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 			if(!fileSalarySlip.isEmpty())account.setAccountHolderSalarySlip(fileSalarySlip.getBytes());
 			
 			accountHolderRepository.save(account);
+			
 		} catch (JsonProcessingException e)
 		{
 			  LOG.error("Wrong JSON passed..!");
-			// TODO: handle exception
+			  e.printStackTrace();
+	
 		}catch (IOException e) 
 		{
 		    LOG.error("File was not uploaded correctly");
@@ -56,8 +58,10 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 		
 		return account;
 }
-	public AccountHolderDetails onUpdateCustomerAccount(AccountHolderDetails acc_Details, int accId) {
-	      
+	
+	public AccountHolderDetails onUpdateCustomerAccount(AccountHolderDetails acc_Details, int accId) 
+	{
+	    
 		Optional<AccountHolderDetails> accRef = accountHolderRepository.findById(accId);
 		if(accRef.isPresent())
 		{

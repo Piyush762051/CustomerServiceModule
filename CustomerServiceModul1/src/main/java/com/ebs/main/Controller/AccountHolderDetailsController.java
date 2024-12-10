@@ -35,10 +35,11 @@ public class AccountHolderDetailsController
 			                                                           @RequestPart ("aAdharCard") MultipartFile fileAdharcard,
 			                                                           @RequestPart("aPanCard") MultipartFile filePancard,
 			                                                           @RequestPart ("aPhoto") MultipartFile filePhoto,
-			                                                           @RequestPart (value = "aJoinLetter", required = false) MultipartFile fileJoinLetter,
-			                                                           @RequestPart (value = "aSalarySlip",required = false) MultipartFile fileSalarySlip)
+			                                                           @RequestPart ("aJoinLetter") MultipartFile fileJoinLetter,
+			                                                           @RequestPart ("aSalarySlip") MultipartFile fileSalarySlip)
 
 	{
+		LOG.info("successfully Done");
 		 AccountHolderDetails accountRef=accHolDetailsServiceI.saveAccount(textData,fileAdharcard,filePancard,filePhoto,fileJoinLetter,fileSalarySlip);
 		return new ResponseEntity<AccountHolderDetails>(accountRef, HttpStatus.CREATED);
   }
