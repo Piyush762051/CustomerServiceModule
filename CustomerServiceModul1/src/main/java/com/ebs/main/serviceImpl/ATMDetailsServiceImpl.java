@@ -34,8 +34,6 @@ public class ATMDetailsServiceImpl implements ATMDetailsServiceI
 	@Override
 	public ATMDetails getATMDetailsById(long id)
 	{
-					
-		
 		Optional<ATMDetails> idRef = atmDetailsRepository.findById(id);
 					if (idRef.isPresent())
 					{
@@ -44,9 +42,7 @@ public class ATMDetailsServiceImpl implements ATMDetailsServiceI
 					else {
 					throw new IDNumberNotFound("Invaild ATM_Id "+id);
 					}
-		
-		
-	}
+		}
 	
 	
 }

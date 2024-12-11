@@ -26,6 +26,7 @@ public class ATMDetailsController
 	@PostMapping("/atmRequest")
 	public ResponseEntity<ATMDetails> onatmRequest(@RequestBody ATMDetails atmDetails)
 	{
+		
 	ATMDetails atm	=atmDetailsServiceI.saveATMDetails(atmDetails);
 		return new ResponseEntity<ATMDetails>(atm,HttpStatus.CREATED);
 		
