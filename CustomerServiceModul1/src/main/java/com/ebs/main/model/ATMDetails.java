@@ -25,6 +25,6 @@ public class ATMDetails
 	private String	atmHolderName;
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date atmValidUpto;	
-	private int	atmcveCode;	//utility class
+	private int	atmcveCode;	//utility class Randam
 
 }

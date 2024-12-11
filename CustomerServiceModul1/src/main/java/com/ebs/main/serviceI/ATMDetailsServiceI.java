@@ -2,8 +2,10 @@ package com.ebs.main.serviceI;
 
 import com.ebs.main.model.ATMDetails;
 
-public interface ATMDetailsServiceI {
+public interface ATMDetailsServiceI 
+{
 
-public 	ATMDetails saveAtmRequest(ATMDetails atmDetails);
+public	ATMDetails saveATMDetails(ATMDetails atmDetails);
+public ATMDetails getATMDetailsById(long id);
 
 }
