@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ebs.main.exception.IDNumberNotFound;
 import com.ebs.main.model.ATMDetails;
 import com.ebs.main.repository.ATMDetailsRepository;
 import com.ebs.main.serviceI.ATMDetailsServiceI;
@@ -31,25 +32,20 @@ public class ATMDetailsServiceImpl implements ATMDetailsServiceI
 	}
 
 	@Override
-	public ATMDetails getATMDetailsById(long id) {
-			if (atmDetailsRepository.existsById(null)) 
-			{
-				Optional<ATMDetails> idRef = atmDetailsRepository.findById(id);
-				if (idRef.isPresent())
-				{
-					return idRef.get();
-				}
-				else {
-					return null; 
-				}
-			}
-				else {
-					return null;
-				}
-			}
+	public ATMDetails getATMDetailsById(long id)
+	{
+					
+		Optional<ATMDetails> idRef = atmDetailsRepository.findById(id);
+					if (idRef.isPresent())
+					{
+						return idRef.get();
+					}
+					else {
+					throw new IDNumberNotFound("Invaild ATM_Id "+id);
+					}
 		
 		
 	}
 	
 	
-
+}

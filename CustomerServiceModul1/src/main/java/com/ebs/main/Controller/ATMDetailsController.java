@@ -32,7 +32,7 @@ public class ATMDetailsController
 	}
 	
 	
-	@GetMapping("/atm/showATM/{atmNumber}")
+	@GetMapping("/showATM/{atmNumber}")
 	public ResponseEntity<ATMDetails> ongetAtmCard(@PathVariable("atmNumber") long id)
 	{
 ATMDetails atm	=	atmDetailsServiceI.getATMDetailsById(id);	
