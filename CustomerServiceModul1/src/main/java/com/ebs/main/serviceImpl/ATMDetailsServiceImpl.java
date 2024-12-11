@@ -35,6 +35,7 @@ public class ATMDetailsServiceImpl implements ATMDetailsServiceI
 	public ATMDetails getATMDetailsById(long id)
 	{
 					
+		
 		Optional<ATMDetails> idRef = atmDetailsRepository.findById(id);
 					if (idRef.isPresent())
 					{
