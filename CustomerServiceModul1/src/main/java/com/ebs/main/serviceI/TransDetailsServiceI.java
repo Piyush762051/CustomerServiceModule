@@ -4,6 +4,12 @@ import com.ebs.main.model.TransactionDetails;
 
 public interface TransDetailsServiceI {
 
-	public TransactionDetails onCreatTransactionDetails(TransactionDetails tranDetails);
+	
+
+	public TransactionDetails saveTransaction(TransactionDetails transactionDetails);
+
+	public TransactionDetails getByTransactionId(long tranctioncId);
+
+	public Iterable<TransactionDetails> getAllTransactiionDetails();
 
 }

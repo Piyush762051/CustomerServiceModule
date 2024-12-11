@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AutoKeyGenrationUtil {
-    private final Random ACCOUNT_NUMBER_RANDOM=new Random(); 
+    private static final Random ACCOUNT_NUMBER_RANDOM=new Random(); 
 	public Long genrateAccountNumber()
 	{
 		return ACCOUNT_NUMBER_RANDOM.nextLong(100000, 999999);
