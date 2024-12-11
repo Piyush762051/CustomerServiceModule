@@ -20,15 +20,11 @@ public class ATMDetailsServiceImpl implements ATMDetailsServiceI
 	@Autowired ATMDetailsRepository atmDetailsRepository;
 
 	@Override
-	public ATMDetails saveATMDetails(ATMDetails atmDetails) {
-		if(atmDetails !=null)
-		{
-			return atmDetailsRepository.save(atmDetails);
-		}
+	public ATMDetails saveATMDetails(ATMDetails atmDetails) 
+	{
+	
+		return atmDetailsRepository.save(atmDetails);
 		
-		else {
-			return null; // Alternatively, throw an exception if saving a null object is not allowed
-		}
 	}
 
 	@Override
