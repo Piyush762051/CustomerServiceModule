@@ -1,6 +1,6 @@
 package com.ebs.main.exception;
 
-public class AccountNotFound extends Exception
+public class AccountNotFound extends RuntimeException
 {
 	public AccountNotFound(String message)
 	{

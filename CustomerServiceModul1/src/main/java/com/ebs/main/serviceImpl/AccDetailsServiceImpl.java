@@ -1,6 +1,7 @@
 package com.ebs.main.serviceImpl;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ebs.main.exception.AccountNotFound;
 import com.ebs.main.model.AccountDetails;
 import com.ebs.main.repository.AccountDetailsRepository;
 import com.ebs.main.serviceI.AccDetailsServiceI;
@@ -66,6 +68,27 @@ public class AccDetailsServiceImpl implements AccDetailsServiceI
 	public Iterable<AccountDetails> displayAccount()
 	{
 		return accDetailsrepository.findAll() ;
+	}
+
+
+	@Override
+	public AccountDetails getAccountDetails(long accountNumber) {
+		    Optional<AccountDetails> opAccuntDetails = accDetailsrepository.findById(accountNumber);
+                 if(opAccuntDetails.isEmpty())
+                 {
+                	 throw new AccountNotFound("Account details not found on account nummmber "+accountNumber);
+                	 
+                 }
+		    
+		    return opAccuntDetails.get();
+	}
+
+
+	@Override
+	public void addTransactionHistory(AccountDetails accountDetails) {
+		
+		accDetailsrepository.save(accountDetails);
+		
 	}
 	
 }

@@ -22,7 +22,7 @@ public class TransactionDetailsController
 	
 	@Autowired private TransDetailsServiceI transDetailsServiceI;
 	
-	
+
 	@PostMapping("/transcationEntry/{accountNumber}")
 	public ResponseEntity<?> ontransactionEntry(@PathVariable ("accountNumber") Long accNo,@RequestBody TransactionDetails transactionDetails)
 	{

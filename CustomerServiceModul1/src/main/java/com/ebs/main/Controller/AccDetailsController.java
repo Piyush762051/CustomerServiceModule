@@ -45,4 +45,6 @@ public class AccDetailsController
 			Iterable<AccountDetails> accRef=serviceI.displayAccount();
 			return new ResponseEntity<Iterable<AccountDetails>>(accRef, HttpStatus.OK);
 	}
+	
+	
 }

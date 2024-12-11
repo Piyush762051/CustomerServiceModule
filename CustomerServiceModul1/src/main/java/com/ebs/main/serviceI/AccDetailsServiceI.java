@@ -11,5 +11,8 @@ public interface AccDetailsServiceI
 			MultipartFile filePhoto, MultipartFile fileJoinLetter, MultipartFile fileSalarySlip);
 
 	public Iterable<AccountDetails> displayAccount();
+	
+	public AccountDetails getAccountDetails(long accountNumber);
+	public void addTransactionHistory(AccountDetails accountDetails);
 
 }
