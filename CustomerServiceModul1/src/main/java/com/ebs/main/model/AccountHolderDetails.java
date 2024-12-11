@@ -9,8 +9,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
@@ -25,19 +23,19 @@ public class AccountHolderDetails
 {
 
 @Id	
-@GeneratedValue(strategy = GenerationType.AUTO)
- private int accountHolderId;               //primaryKey(int)
+ private long accountHolderId; 
  private String accountHolderName;
  private String accountHolderAddress;
  private String	accountHolderEmail;
  private String	accountHolderContactNumber;
  
-@JsonFormat(pattern = "yyyy-mm-dd")
+ @JsonFormat(pattern = "yyyy-mm-dd")
  private Date accountHolderDateOfBirth;
-
  private int accountholderAge;
+ 
  @Enumerated(EnumType.STRING)
  private	AccountHolderGender	accountHolderGender;  // MALE,FEMALE,OTHER
+ 
  @Lob
  @Column(length = 999999999)
  private	byte[]	accountHolderAdharCard;

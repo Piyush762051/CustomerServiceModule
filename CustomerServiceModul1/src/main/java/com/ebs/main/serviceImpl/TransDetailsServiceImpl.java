@@ -17,9 +17,12 @@ public class TransDetailsServiceImpl implements TransDetailsServiceI
 	@Autowired TransactionDetailsRepository transactionDetailsRepository;
 
 	@Override
-	public TransactionDetails onCreatTransactionDetails(TransactionDetails tranDetails) {
-		return transactionDetailsRepository.save(tranDetails);
-		 
+	public TransactionDetails onsaveTransactionEntry(Long accNo, TransactionDetails transactionDetails)
+	{
+		
+		return null;
 	}
+
+	
 	
 }

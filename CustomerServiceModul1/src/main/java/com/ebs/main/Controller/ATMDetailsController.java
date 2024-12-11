@@ -3,10 +3,16 @@ package com.ebs.main.Controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ebs.main.model.ATMDetails;
 import com.ebs.main.serviceI.ATMDetailsServiceI;
-
+@RequestMapping("/atm")
 @RestController
 public class ATMDetailsController
 {
@@ -14,4 +20,12 @@ public class ATMDetailsController
 	
 	@Autowired private ATMDetailsServiceI atmDetailsServiceI;
 
+	
+	@PostMapping("/atmRequest")
+	public ResponseEntity<ATMDetails> onatmRequest (@RequestBody ATMDetails atmDetails)
+	{
+     	ATMDetails atmRef	=atmDetailsServiceI.saveAtmRequest(atmDetails);
+		return new ResponseEntity<ATMDetails>(atmRef, HttpStatus.CREATED);
+		
+	}
 }

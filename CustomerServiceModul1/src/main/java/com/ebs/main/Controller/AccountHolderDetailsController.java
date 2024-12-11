@@ -44,14 +44,14 @@ public class AccountHolderDetailsController
 		return new ResponseEntity<AccountHolderDetails>(accountRef, HttpStatus.CREATED);
   }
 	
-	@PutMapping("/update-Account/{accountHolderId}")
+	@PutMapping("/updateAccountHolder/{accountHolderId}")
 	public ResponseEntity<AccountHolderDetails> onUpdateAccount(@RequestPart("aData") String textData,
 			                                                    @RequestPart("aAdharCard")MultipartFile fileAdharcard,
 			                                                    @RequestPart("aPanCard") MultipartFile filePancard,
 			                                                    @RequestPart ("aPhoto") MultipartFile filePhoto,
 			                                                    @RequestPart(value = "aJoinLetter",required = false)MultipartFile fileJoinLetter,
 			                                                    @RequestPart(value = "aSalarySlip",required = false)MultipartFile fileSalarySlip,
-			                                                    @PathVariable ("accountHolderId")int accId)
+			                                                    @PathVariable ("accountHolderId")Long accId)
 	{
 		AccountHolderDetails accRef=accHolDetailsServiceI.onUpdateCustomerAccount(accId,textData,fileAdharcard,filePancard,filePhoto,fileJoinLetter,fileSalarySlip);
 		                            
@@ -60,15 +60,16 @@ public class AccountHolderDetailsController
 	}
 	
 	
-	@GetMapping("/overall-accountCustomer")
+	@GetMapping("/allAccountHolder")
 	public ResponseEntity<Iterable<AccountHolderDetails>> ongetAccountDetails()
 	{
 			Iterable<AccountHolderDetails> accRef=accHolDetailsServiceI.getCustomerAccount();
 			return new ResponseEntity<Iterable<AccountHolderDetails>>(accRef,HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/particular-accountCustomer/{accountHolderId}")
-	public ResponseEntity<AccountHolderDetails> onsingleAccount(@PathVariable ("accountHolderId") int id)
+	
+	@GetMapping("/particularAccountHolder/{accountHolderId}")
+	public ResponseEntity<AccountHolderDetails> onsingleAccount(@PathVariable ("accountHolderId") long id)
 	{
 			AccountHolderDetails accRef	=accHolDetailsServiceI.onsingleAccount(id);
 			return new ResponseEntity<AccountHolderDetails>(accRef,HttpStatus.OK);

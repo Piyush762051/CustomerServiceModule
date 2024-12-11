@@ -27,11 +27,10 @@ import lombok.NoArgsConstructor;
 public class AccountDetails 
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long accountNumber;	    //primary key(Long)
-	private static String bankName;	      
-	private static String branchIFSC_Code;	
-	private static	String bankAddress; 
+	private static String bankName="Easy bank System";	      
+	private static String branchIFSC_Code="EBS1234K";	
+	private static	String bankAddress="Karvenagar Pune"; 
 
 	@Enumerated(EnumType.STRING)
 	private AccountType accountType;	 // SAVING, CURRENT, SALARY

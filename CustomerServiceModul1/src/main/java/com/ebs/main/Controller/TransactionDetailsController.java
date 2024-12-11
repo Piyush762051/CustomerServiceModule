@@ -4,7 +4,9 @@ package com.ebs.main.Controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +23,19 @@ public class TransactionDetailsController
 	@Autowired private TransDetailsServiceI transDetailsServiceI;
 	
 	
-	@PostMapping("/createRecord")
-	public ResponseEntity<TransactionDetails> oncreatedRecord(@RequestBody TransactionDetails tranDetails)
+	@PostMapping("/transcationEntry/{accountNumber}")
+	public ResponseEntity<?> ontransactionEntry(@PathVariable ("accountNumber") Long accNo,@RequestBody TransactionDetails transactionDetails)
 	{
-		TransactionDetails traDetails = transDetailsServiceI.onCreatTransactionDetails(tranDetails);
-		return new ResponseEntity<TransactionDetails>(traDetails,org.springframework.http.HttpStatus.CREATED);
+		try 
+		{
+	        TransactionDetails transDetails = transDetailsServiceI.onsaveTransactionEntry(accNo, transactionDetails);
+	        return new ResponseEntity<>(transDetails, HttpStatus.CREATED);
+	    }
+		catch (Exception e)
+		{
+	        LOG.error("Error saving transaction: {}", e.getMessage());
+	        return new ResponseEntity<>("Transaction failed: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
 	}
 	
 

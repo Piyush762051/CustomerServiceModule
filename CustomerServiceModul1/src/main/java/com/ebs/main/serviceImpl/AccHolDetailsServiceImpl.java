@@ -62,24 +62,8 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 		return accountHolderRepository.findAll();
 	}
 	
-	
 	@Override
-	public AccountHolderDetails onsingleAccount(int id) 
-	{
-		Optional<AccountHolderDetails> accReg = accountHolderRepository.findById(id);
-		
-		if (accReg.isPresent()) {
-			return accReg.get();
-		}
-		
-		else {
-			throw new IDNumberNotFound("Id Invaild"+id);
-		}
-	
-
-	}
-	@Override
-	public AccountHolderDetails onUpdateCustomerAccount(int accId, String textData, MultipartFile fileAdharcard,
+	public AccountHolderDetails onUpdateCustomerAccount(Long accId, String textData, MultipartFile fileAdharcard,
 			MultipartFile filePancard, MultipartFile filePhoto, MultipartFile fileJoinLetter,
 			MultipartFile fileSalarySlip) {
 		Optional<AccountHolderDetails> accRef = accountHolderRepository.findById(accId);
@@ -108,6 +92,21 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 		return account;
 		
 	}
+
+	@Override
+	public AccountHolderDetails onsingleAccount(long id)
+	{
+		Optional<AccountHolderDetails> accReg = accountHolderRepository.findById(id);
 	
+	if (accReg.isPresent()) {
+		return accReg.get();
+	}
+	
+	else {
+		throw new IDNumberNotFound("Id Invaild"+id);
+	}
+	
+	}
+
 	
 }

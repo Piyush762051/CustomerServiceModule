@@ -12,9 +12,9 @@ public AccountHolderDetails saveAccount(String textData, MultipartFile fileAdhar
 
 public Iterable<AccountHolderDetails> getCustomerAccount();
 
-public AccountHolderDetails onsingleAccount(int id);
+public AccountHolderDetails onsingleAccount(long id);
 
-public AccountHolderDetails onUpdateCustomerAccount(int accId, String textData, MultipartFile fileAdharcard,
+public AccountHolderDetails onUpdateCustomerAccount(Long accId, String textData, MultipartFile fileAdharcard,
 		MultipartFile filePancard, MultipartFile filePhoto, MultipartFile fileJoinLetter, MultipartFile fileSalarySlip);
 
 

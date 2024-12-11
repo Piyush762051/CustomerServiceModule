@@ -1,6 +1,10 @@
 package com.ebs.main.model;
 
 
+import java.util.Date;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.ebs.main.enm.TransactionMedium;
 import com.ebs.main.enm.TransactionStatus;
 import com.ebs.main.enm.TransactionType;
@@ -22,8 +26,6 @@ import lombok.NoArgsConstructor;
 public class TransactionDetails
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	
     private	long	tranctioncId;  //accountNo+random  PrimaryKey (long )
     private	float	transactionAmmount;// must not be 0
    
@@ -36,5 +38,6 @@ public class TransactionDetails
     @Enumerated(EnumType.STRING)
     private	TransactionStatus	transactionStatus;      //SUCCESS,FAILURE,PENDING,CANCELLED
     private	String	transactionRemark;   //constant
-
+    @CreationTimestamp
+    private Date transactionDate;
 }
