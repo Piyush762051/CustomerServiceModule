@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ebs.main.model.AccountHolderDetails;
 import com.ebs.main.serviceI.AccHolDetailsServiceI;
 
-@RequestMapping("/account")
+@RequestMapping("/accountHolder")
 @RestController
 public class AccountHolderDetailsController 
 {

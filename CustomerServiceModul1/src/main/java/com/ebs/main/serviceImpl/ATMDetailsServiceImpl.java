@@ -8,27 +8,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ebs.main.exception.IDNumberNotFound;
 import com.ebs.main.model.ATMDetails;
+import com.ebs.main.model.AccountDetails;
 import com.ebs.main.repository.ATMDetailsRepository;
 import com.ebs.main.serviceI.ATMDetailsServiceI;
+import com.ebs.main.util.AutoKeyGenration;
+import com.ebs.main.util.AutoKeyGenrationCVVcode;
+import com.ebs.main.util.AutoKeyGenrationId;
+import com.ebs.main.util.AutokeyGenrationATMNumber;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Service
 public class ATMDetailsServiceImpl implements ATMDetailsServiceI
 {
 	private static final Logger LOG=LoggerFactory.getLogger(ATMDetailsServiceImpl.class);
-	
 	@Autowired ATMDetailsRepository atmDetailsRepository;
-
+	
 	@Override
-	public ATMDetails saveATMDetails(ATMDetails atmDetails) {
-		if(atmDetails !=null)
-		{
-			return atmDetailsRepository.save(atmDetails);
-		}
-		
-		else {
-			return null; // Alternatively, throw an exception if saving a null object is not allowed
-		}
-	}
+	public ATMDetails saveATMDetails(ATMDetails atmDetails)
+	{
+		atmDetails.setAtmNumber(AutokeyGenrationATMNumber.genrateATMNumber());
+		atmDetails.setAtmcveCode(AutoKeyGenrationCVVcode.genrateCVv());
+			return	atmDetailsRepository.save(atmDetails);  
+      	}
 
 	@Override
 	public ATMDetails getATMDetailsById(long id)
@@ -38,7 +39,8 @@ public class ATMDetailsServiceImpl implements ATMDetailsServiceI
 					{
 						return idRef.get();
 					}
-					else {
+					else
+					{
 					throw new IDNumberNotFound("Invaild ATM_Id "+id);
 					}
 		}

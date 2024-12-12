@@ -2,6 +2,9 @@ package com.ebs.main.util;
 
 import java.util.Random;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class AutoKeyGenrationTransId 
 {
 	private static final Random TRANSCATION_Id_RANDOM=new Random();

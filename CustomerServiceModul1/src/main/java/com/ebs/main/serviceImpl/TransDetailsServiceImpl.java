@@ -58,6 +58,7 @@ public class TransDetailsServiceImpl implements TransDetailsServiceI
 			  { 
 				  accountDetails.setCurrentBalance(accountDetails.getCurrentBalance()+transactionDetails.getTransactionAmmount());
 				  transactionDetails.setTransactionStatus(TransactionStatus.SUCCESS);
+				  accountDetails.getCurrentBalance();
 				  transactionDetails.setTransactionRemark("Transaction successfully done.");
 				  accountDetails.getAccountTransactionHistory().add(transactionDetails);
 				  

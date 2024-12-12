@@ -31,7 +31,6 @@ public class ATMDetailsController
 		
 	}
 	
-	
 	@GetMapping("/showATM/{atmNumber}")
 	public ResponseEntity<ATMDetails> ongetAtmCard(@PathVariable("atmNumber") long id)
 	{

@@ -83,7 +83,7 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 		} catch (JsonProcessingException e)
 		{
 			  LOG.error("Wrong JSON passed..!");
-			// TODO: handle exception
+		
 		}catch (IOException e) 
 		{
 		    LOG.error("File was not uploaded correctly");

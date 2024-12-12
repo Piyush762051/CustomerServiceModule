@@ -20,7 +20,6 @@ import lombok.NoArgsConstructor;
 public class ATMDetails
 {
     @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
 	private long atmNumber;	//random  primary Key Long
 	private String	atmHolderName;
 	@JsonFormat(pattern = "yyyy-mm-dd")
