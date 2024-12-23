@@ -26,8 +26,10 @@ public class ATMDetailsServiceImpl implements ATMDetailsServiceI
 	@Override
 	public ATMDetails saveATMDetails(ATMDetails atmDetails)
 	{
+		
 		atmDetails.setAtmNumber(AutokeyGenrationATMNumber.genrateATMNumber());
 		atmDetails.setAtmcveCode(AutoKeyGenrationCVVcode.genrateCVv());
+		
 			return	atmDetailsRepository.save(atmDetails);  
       	}
 

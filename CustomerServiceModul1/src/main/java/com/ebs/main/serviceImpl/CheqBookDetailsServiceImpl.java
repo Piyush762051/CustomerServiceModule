@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ebs.main.model.ChequeBookDetails;
 import com.ebs.main.repository.ChequeBookDetailsRepository;
 import com.ebs.main.serviceI.CheqBookDetailsServiceI;
 
@@ -14,4 +15,11 @@ public class CheqBookDetailsServiceImpl implements CheqBookDetailsServiceI
 	private static final Logger LOG=LoggerFactory.getLogger(CheqBookDetailsServiceImpl.class);
 	
 	@Autowired ChequeBookDetailsRepository chequeBookDetailsRepository;
+
+	@Override
+	public ChequeBookDetails onRequestChequeBook(ChequeBookDetails chBookDetails)
+	{
+		
+		return null;
+	}
 }

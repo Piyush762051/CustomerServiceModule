@@ -13,6 +13,9 @@ public interface AccDetailsServiceI
 	public Iterable<AccountDetails> displayAccount();
 	
 	public AccountDetails getAccountDetails(long accountNumber);
+	
 	public void addTransactionHistory(AccountDetails accountDetails);
+	
+	public void addNewAccountHolderRequest(AccountDetails accountDetails);
 
 }

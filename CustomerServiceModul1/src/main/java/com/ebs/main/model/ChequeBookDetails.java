@@ -43,9 +43,6 @@ public class ChequeBookDetails
     @Enumerated(EnumType.STRING)
     private ChequeBookStatus status; // ACTIVE,EXPIRED,CANCELLED
 
-    private Long startChequeNumber; // First cheque number
-    private Long endChequeNumber;   // Last cheque number
-
-    
+    @Temporal(TemporalType.DATE)
     private Date requestDate; // When the cheque book was requested
 }

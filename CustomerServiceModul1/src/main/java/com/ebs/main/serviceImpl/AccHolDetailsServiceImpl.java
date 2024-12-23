@@ -66,9 +66,9 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 	public AccountHolderDetails onUpdateCustomerAccount(Long accId, String textData, MultipartFile fileAdharcard,
 			MultipartFile filePancard, MultipartFile filePhoto, MultipartFile fileJoinLetter,
 			MultipartFile fileSalarySlip) {
-		Optional<AccountHolderDetails> accRef = accountHolderRepository.findById(accId);
+		Optional<AccountHolderDetails> accHolderRef = accountHolderRepository.findById(accId);
 		AccountHolderDetails account=null;
-		if(accRef.isPresent())
+		if(accHolderRef.isPresent())
 		try 
 		{
 			account=objectMapper.readValue(textData, AccountHolderDetails.class);
@@ -80,11 +80,13 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 			if(!fileSalarySlip.isEmpty())account.setAccountHolderSalarySlip(fileSalarySlip.getBytes());
 			
 			accountHolderRepository.save(account);
-		} catch (JsonProcessingException e)
+		}
+		catch (JsonProcessingException e)
 		{
 			  LOG.error("Wrong JSON passed..!");
 		
-		}catch (IOException e) 
+		}
+		catch (IOException e) 
 		{
 		    LOG.error("File was not uploaded correctly");
 		}

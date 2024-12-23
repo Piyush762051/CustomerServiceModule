@@ -90,5 +90,9 @@ public class AccDetailsServiceImpl implements AccDetailsServiceI
 		accDetailsrepository.save(accountDetails);
 		
 	}
+	public void addNewAccountHolderRequest(AccountDetails accountDetails)
+	{
+		accDetailsrepository.save(accountDetails);
+	}
 	
 }

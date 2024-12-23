@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ebs.main.model.ATMDetails;
 import com.ebs.main.serviceI.ATMDetailsServiceI;
 
-@RequestMapping("/atm-details")
+@RequestMapping("/atmDetails")
 @RestController
 public class ATMDetailsController
 {
@@ -26,15 +26,15 @@ public class ATMDetailsController
 	public ResponseEntity<ATMDetails> onatmRequest(@RequestBody ATMDetails atmDetails)
 	{
 		
-	ATMDetails atm	=atmDetailsServiceI.saveATMDetails(atmDetails);
-		return new ResponseEntity<ATMDetails>(atm,HttpStatus.CREATED);
+	ATMDetails atmRef=atmDetailsServiceI.saveATMDetails(atmDetails);
+		return new ResponseEntity<ATMDetails>(atmRef,HttpStatus.CREATED);
 		
 	}
 	
 	@GetMapping("/showATM/{atmNumber}")
 	public ResponseEntity<ATMDetails> ongetAtmCard(@PathVariable("atmNumber") long id)
 	{
-ATMDetails atm	=	atmDetailsServiceI.getATMDetailsById(id);	
+      ATMDetails atm=atmDetailsServiceI.getATMDetailsById(id);	
 		return new ResponseEntity<ATMDetails>(atm,HttpStatus.FOUND);
 		
 	}

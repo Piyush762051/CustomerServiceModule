@@ -42,7 +42,7 @@ public class AccountHolderDetailsController
 		LOG.info("successfully Done");
 		 AccountHolderDetails accountRef=accHolDetailsServiceI.saveAccount(textData,fileAdharcard,filePancard,filePhoto,fileJoinLetter,fileSalarySlip);
 		return new ResponseEntity<AccountHolderDetails>(accountRef, HttpStatus.CREATED);
-  }
+    }
 	
 	@PutMapping("/updateAccountHolder/{accountHolderId}")
 	public ResponseEntity<AccountHolderDetails> onUpdateAccount(@RequestPart("aData") String textData,
