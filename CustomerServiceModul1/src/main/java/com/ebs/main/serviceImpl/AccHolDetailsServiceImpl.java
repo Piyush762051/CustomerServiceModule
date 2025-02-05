@@ -12,6 +12,7 @@ import com.ebs.main.exception.IDNumberNotFound;
 import com.ebs.main.model.AccountHolderDetails;
 import com.ebs.main.repository.AccountHolderRepository;
 import com.ebs.main.serviceI.AccHolDetailsServiceI;
+import com.ebs.main.util.AutoGenerateUser_Pass;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -39,6 +40,7 @@ public class AccHolDetailsServiceImpl implements AccHolDetailsServiceI
 			if(!filePhoto.isEmpty())account.setAccountHolderPhoto(filePhoto.getBytes());
 			if(!fileJoinLetter.isEmpty())account.setAccountHolderJoiningLatter(fileJoinLetter.getBytes());
 			if(!fileSalarySlip.isEmpty())account.setAccountHolderSalarySlip(fileSalarySlip.getBytes());
+			
 			
 			accountHolderRepository.save(account);
 			

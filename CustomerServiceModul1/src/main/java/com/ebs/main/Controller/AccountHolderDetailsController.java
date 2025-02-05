@@ -30,35 +30,6 @@ public class AccountHolderDetailsController
 	
 	@Autowired private AccHolDetailsServiceI accHolDetailsServiceI;
 	
-	@PostMapping("/createAccountHolder")
-	public ResponseEntity<AccountHolderDetails> oncreateAccountCustomer(@RequestPart ("aData") String textData,
-			                                                           @RequestPart ("aAdharCard") MultipartFile fileAdharcard,
-			                                                           @RequestPart("aPanCard") MultipartFile filePancard,
-			                                                           @RequestPart ("aPhoto") MultipartFile filePhoto,
-			                                                           @RequestPart ("aJoinLetter") MultipartFile fileJoinLetter,
-			                                                           @RequestPart ("aSalarySlip") MultipartFile fileSalarySlip)
-
-	{
-		LOG.info("successfully Done");
-		 AccountHolderDetails accountRef=accHolDetailsServiceI.saveAccount(textData,fileAdharcard,filePancard,filePhoto,fileJoinLetter,fileSalarySlip);
-		return new ResponseEntity<AccountHolderDetails>(accountRef, HttpStatus.CREATED);
-  }
-	
-	@PutMapping("/updateAccountHolder/{accountHolderId}")
-	public ResponseEntity<AccountHolderDetails> onUpdateAccount(@RequestPart("aData") String textData,
-			                                                    @RequestPart("aAdharCard")MultipartFile fileAdharcard,
-			                                                    @RequestPart("aPanCard") MultipartFile filePancard,
-			                                                    @RequestPart ("aPhoto") MultipartFile filePhoto,
-			                                                    @RequestPart(value = "aJoinLetter",required = false)MultipartFile fileJoinLetter,
-			                                                    @RequestPart(value = "aSalarySlip",required = false)MultipartFile fileSalarySlip,
-			                                                    @PathVariable ("accountHolderId")Long accId)
-	{
-		AccountHolderDetails accRef=accHolDetailsServiceI.onUpdateCustomerAccount(accId,textData,fileAdharcard,filePancard,filePhoto,fileJoinLetter,fileSalarySlip);
-		                            
-		return new ResponseEntity<AccountHolderDetails>(accRef,HttpStatus.CREATED);
-	
-	}
-	
 	
 	@GetMapping("/allAccountHolder")
 	public ResponseEntity<Iterable<AccountHolderDetails>> ongetAccountDetails()

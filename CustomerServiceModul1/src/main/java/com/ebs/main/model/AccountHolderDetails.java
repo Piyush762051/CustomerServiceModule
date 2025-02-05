@@ -24,11 +24,12 @@ public class AccountHolderDetails
 
 @Id	
  private long accountHolderId; 
- private String accountHolderName;
+ private String accountHolderName; //Pratik M NArkhedde
  private String accountHolderAddress;
  private String	accountHolderEmail;
  private String	accountHolderContactNumber;
- 
+ private String userName;
+ private String password;
  @JsonFormat(pattern = "yyyy-mm-dd")
  private Date accountHolderDateOfBirth;
  private int accountholderAge;
@@ -51,6 +52,6 @@ public class AccountHolderDetails
  @Lob
  @Column(length = 999999999)
  private	byte[]	accountHolderSalarySlip;    //Optional
-
+ 
 
 }

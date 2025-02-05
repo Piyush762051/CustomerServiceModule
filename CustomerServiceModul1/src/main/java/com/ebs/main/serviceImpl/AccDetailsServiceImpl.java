@@ -13,6 +13,7 @@ import com.ebs.main.exception.AccountNotFound;
 import com.ebs.main.model.AccountDetails;
 import com.ebs.main.repository.AccountDetailsRepository;
 import com.ebs.main.serviceI.AccDetailsServiceI;
+import com.ebs.main.util.AutoGenerateUser_Pass;
 import com.ebs.main.util.AutoKeyGenration;
 import com.ebs.main.util.AutoKeyGenrationId;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -37,6 +38,10 @@ public class AccDetailsServiceImpl implements AccDetailsServiceI
 			account=objectMapper.readValue(textData, AccountDetails.class);
 			account.setAccountNumber(AutoKeyGenration.genrateAccountNumber());
 			account.getAccountHolderDetails().setAccountHolderId(AutoKeyGenrationId.genrateAccountHolderId());
+		    account.getAccountHolderDetails().setUserName(AutoGenerateUser_Pass.getUsername(account.getAccountHolderDetails().getAccountHolderName()));
+		    account.getAccountHolderDetails().setPassword(AutoGenerateUser_Pass.getPassword(account.getAccountHolderDetails().getAccountHolderName()));
+			
+		    
 			LOG.info(account.toString());
 			
 			if(account.getAccountHolderDetails() !=null) {

@@ -31,8 +31,8 @@ public class AccDetailsController
             @RequestPart ("aAdharCard") MultipartFile fileAdharcard,
             @RequestPart("aPanCard") MultipartFile filePancard,
             @RequestPart ("aPhoto") MultipartFile filePhoto,
-            @RequestPart ("aJoinLetter") MultipartFile fileJoinLetter,
-            @RequestPart ("aSalarySlip") MultipartFile fileSalarySlip)
+            @RequestPart (value = "aJoinLetter",required = false) MultipartFile fileJoinLetter,
+            @RequestPart (value ="aSalarySlip",required = false) MultipartFile fileSalarySlip)
 	{
 		
 		AccountDetails accountDetailRef=serviceI.saveAccount(textData,fileAdharcard,filePancard,filePhoto,fileJoinLetter,fileSalarySlip);
