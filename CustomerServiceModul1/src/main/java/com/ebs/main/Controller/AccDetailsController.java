@@ -4,8 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -15,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ebs.main.model.AccountDetails;
 import com.ebs.main.model.AccountHolderDetails;
 import com.ebs.main.serviceI.AccDetailsServiceI;
-
+@CrossOrigin("http://localhost:5173")
 @RequestMapping("/accountDetail")
 @RestController
 public class AccDetailsController 
@@ -44,6 +47,13 @@ public class AccDetailsController
 	{
 			Iterable<AccountDetails> accRef=serviceI.displayAccount();
 			return new ResponseEntity<Iterable<AccountDetails>>(accRef, HttpStatus.OK);
+	}
+	
+	@GetMapping("/singlecustomerdata/{accountNumber}")
+	public ResponseEntity<AccountDetails> ongetSingleCustomer(@PathVariable("accountNumber") long accountno)
+	{
+		AccountDetails data=serviceI.ongetSingleCustomer(accountno);
+		return new ResponseEntity<AccountDetails>(data,HttpStatus.OK);
 	}
 	
 	

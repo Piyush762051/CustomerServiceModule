@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ebs.main.enm.AccountStatus;
 import com.ebs.main.exception.AccountNotFound;
 import com.ebs.main.model.AccountDetails;
 import com.ebs.main.repository.AccountDetailsRepository;
@@ -37,6 +38,7 @@ public class AccDetailsServiceImpl implements AccDetailsServiceI
 			account=objectMapper.readValue(textData, AccountDetails.class);
 			account.setAccountNumber(AutoKeyGenration.genrateAccountNumber());
 			account.getAccountHolderDetails().setAccountHolderId(AutoKeyGenrationId.genrateAccountHolderId());
+			account.setAccountStatus(AccountStatus.INACTIVE);
 			LOG.info(account.toString());
 			
 			if(account.getAccountHolderDetails() !=null) {
@@ -93,6 +95,14 @@ public class AccDetailsServiceImpl implements AccDetailsServiceI
 	public void addNewAccountHolderRequest(AccountDetails accountDetails)
 	{
 		accDetailsrepository.save(accountDetails);
+	}
+
+
+	@Override
+	public AccountDetails ongetSingleCustomer(long accountno)
+	{
+		AccountDetails findByAccountNumber = accDetailsrepository.findByAccountNumber(accountno);
+		return findByAccountNumber;
 	}
 	
 }

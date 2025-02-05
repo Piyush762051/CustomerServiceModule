@@ -18,4 +18,6 @@ public interface AccDetailsServiceI
 	
 	public void addNewAccountHolderRequest(AccountDetails accountDetails);
 
+	public AccountDetails ongetSingleCustomer(long accountno);
+
 }
