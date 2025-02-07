@@ -8,5 +8,6 @@ import com.ebs.main.model.AccountDetails;
 
 public interface AccountDetailsRepository extends JpaRepository<AccountDetails, Long>
 {
+	public AccountDetails findByAccountNumber(long accountno);
 
 }

@@ -4,9 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,7 +21,7 @@ import com.ebs.main.enm.AccountStatus;
 import com.ebs.main.model.AccountDetails;
 import com.ebs.main.model.AccountHolderDetails;
 import com.ebs.main.serviceI.AccDetailsServiceI;
-
+@CrossOrigin("http://localhost:5173")
 @RequestMapping("/accountDetail")
 @RestController
 public class AccDetailsController 
@@ -51,7 +52,13 @@ public class AccDetailsController
 			return new ResponseEntity<Iterable<AccountDetails>>(accRef, HttpStatus.OK);
 	}
 	
-	
+	@GetMapping("/singlecustomerdata/{accountNumber}")
+	public ResponseEntity<AccountDetails> ongetSingleCustomer(@PathVariable("accountNumber") long accountno)
+	{
+		AccountDetails data=serviceI.ongetSingleCustomer(accountno);
+		return new ResponseEntity<AccountDetails>(data,HttpStatus.OK);
+	}
+
 	@PatchMapping("/upDateAcc/{accountNumber}/{accountStatus}")
 	public ResponseEntity<AccountDetails> onsetAccount(@PathVariable("accountNumber") long accountnumber,
 			                                           @PathVariable("accountStatus") AccountStatus accountstatus
@@ -62,10 +69,5 @@ public class AccDetailsController
 		return new ResponseEntity<AccountDetails>(accDetRef,HttpStatus.CREATED);
 		
 	}
-	
-	
-	
-	
-	
-	
+  
 }

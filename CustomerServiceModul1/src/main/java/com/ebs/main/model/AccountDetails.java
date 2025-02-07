@@ -45,6 +45,9 @@ public class AccountDetails
 	@OneToMany(cascade = CascadeType.MERGE.REMOVE.REFRESH.DETACH)
 	private Set<TransactionDetails> accountTransactionHistory;	
 	
+	@OneToMany(cascade = CascadeType.MERGE.REMOVE.REFRESH.DETACH)
+	private Set<EnquiryRequest> enquiryRequest;
+	
 	@OneToOne(cascade = CascadeType.MERGE.REMOVE.REFRESH.DETACH)
 	private	ATMDetails atmDetails;	
 	

@@ -39,10 +39,7 @@ public class AccDetailsServiceImpl implements AccDetailsServiceI
 			account=objectMapper.readValue(textData, AccountDetails.class);
 			account.setAccountNumber(AutoKeyGenration.genrateAccountNumber());
 			account.getAccountHolderDetails().setAccountHolderId(AutoKeyGenrationId.genrateAccountHolderId());
-		    account.getAccountHolderDetails().setUserName(AutoGenerateUser_Pass.getUsername(account.getAccountHolderDetails().getAccountHolderName()));
-		    account.getAccountHolderDetails().setPassword(AutoGenerateUser_Pass.getPassword(account.getAccountHolderDetails().getAccountHolderName()));
-			
-		    
+
 			LOG.info(account.toString());
 			
 			if(account.getAccountHolderDetails() !=null) 
@@ -98,18 +95,5 @@ public class AccDetailsServiceImpl implements AccDetailsServiceI
 		
 		accDetailsrepository.save(accountDetails);
 		
-	}
-
-
-	@Override
-	public AccountDetails setAccountNumber(long accountnumber, AccountStatus accountstatus)
-	{
-		
-		
-		
-		return null;
-	}
-
-
-	
+	}	
 }
