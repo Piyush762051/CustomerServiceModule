@@ -21,79 +21,93 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
-public class AccDetailsServiceImpl implements AccDetailsServiceI
-{
-	private static final Logger LOG=LoggerFactory.getLogger(AccDetailsServiceImpl.class);
+public class AccDetailsServiceImpl implements AccDetailsServiceI {
+	private static final Logger LOG = LoggerFactory.getLogger(AccDetailsServiceImpl.class);
 
-	@Autowired AccountDetailsRepository accDetailsrepository;
-    @Autowired private ObjectMapper objectMapper; 
-    
-	
+	@Autowired
+	AccountDetailsRepository accDetailsrepository;
+	@Autowired
+	private ObjectMapper objectMapper;
+
 	@Override
 	public AccountDetails saveAccount(String textData, MultipartFile fileAdharcard, MultipartFile filePancard,
-			MultipartFile filePhoto, MultipartFile fileJoinLetter, MultipartFile fileSalarySlip)
-	{
-		AccountDetails account=null;
-		try
-		{
-			account=objectMapper.readValue(textData, AccountDetails.class);
+			MultipartFile filePhoto, MultipartFile fileJoinLetter, MultipartFile fileSalarySlip) {
+		AccountDetails account = null;
+		try {
+			account = objectMapper.readValue(textData, AccountDetails.class);
 			account.setAccountNumber(AutoKeyGenration.genrateAccountNumber());
 			account.getAccountHolderDetails().setAccountHolderId(AutoKeyGenrationId.genrateAccountHolderId());
 
 			LOG.info(account.toString());
-			
-			if(account.getAccountHolderDetails() !=null) 
-			{
-				
-			if(!fileAdharcard.isEmpty()) account.getAccountHolderDetails().setAccountHolderAdharCard(fileAdharcard.getBytes());
-			if(!filePancard.isEmpty()) account.getAccountHolderDetails().setAccountHolderPanCard(filePancard.getBytes());
-			if(!filePhoto.isEmpty()) account.getAccountHolderDetails().setAccountHolderPhoto(filePhoto.getBytes());
-			if(!fileJoinLetter.isEmpty()) account.getAccountHolderDetails().setAccountHolderJoiningLatter(fileJoinLetter.getBytes());
-			if(!fileSalarySlip.isEmpty()) account.getAccountHolderDetails().setAccountHolderSalarySlip(fileSalarySlip.getBytes());
-			
-			accDetailsrepository.save(account);
-			
+
+			if (account.getAccountHolderDetails() != null) {
+
+				if (!fileAdharcard.isEmpty())
+					account.getAccountHolderDetails().setAccountHolderAdharCard(fileAdharcard.getBytes());
+				if (!filePancard.isEmpty())
+					account.getAccountHolderDetails().setAccountHolderPanCard(filePancard.getBytes());
+				if (!filePhoto.isEmpty())
+					account.getAccountHolderDetails().setAccountHolderPhoto(filePhoto.getBytes());
+				if (!fileJoinLetter.isEmpty())
+					account.getAccountHolderDetails().setAccountHolderJoiningLatter(fileJoinLetter.getBytes());
+				if (!fileSalarySlip.isEmpty())
+					account.getAccountHolderDetails().setAccountHolderSalarySlip(fileSalarySlip.getBytes());
+
+				accDetailsrepository.save(account);
+
 			}
-			
+
+		} catch (JsonProcessingException e) {
+			LOG.error("Wrong JSON passed..!");
+			e.printStackTrace();
+
+		} catch (IOException e) {
+			LOG.error("File was not uploaded correctly");
 		}
-		catch (JsonProcessingException e)
-		{
-			  LOG.error("Wrong JSON passed..!");
-			  e.printStackTrace();
-	
-		}catch (IOException e) 
-		{
-		    LOG.error("File was not uploaded correctly");
-		}
-		
+
 		return account;
-      }
-
-
-	@Override
-	public Iterable<AccountDetails> displayAccount()
-	{
-		return accDetailsrepository.findAll() ;
 	}
 
+	@Override
+	public Iterable<AccountDetails> displayAccount() {
+		return accDetailsrepository.findAll();
+	}
 
 	@Override
 	public AccountDetails getAccountDetails(long accountNumber) {
-		    Optional<AccountDetails> opAccuntDetails = accDetailsrepository.findById(accountNumber);
-                 if(opAccuntDetails.isEmpty())
-                 {
-                	 throw new AccountNotFound("Account details not found on account nummmber "+accountNumber);
-                	 
-                 }
-		    
-		    return opAccuntDetails.get();
-	}
+		Optional<AccountDetails> opAccuntDetails = accDetailsrepository.findById(accountNumber);
+		if (opAccuntDetails.isEmpty()) {
+			throw new AccountNotFound("Account details not found on account nummmber " + accountNumber);
 
+		}
+
+		return opAccuntDetails.get();
+	}
 
 	@Override
 	public void addTransactionHistory(AccountDetails accountDetails) {
-		
+
 		accDetailsrepository.save(accountDetails);
-		
-	}	
+
+	}
+
+	@Override
+	public void addNewAccountHolderRequest(AccountDetails accountDetails) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public AccountDetails ongetSingleCustomer(long accountno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AccountDetails onsetAccountNumber(long accountnumber, AccountStatus accountstatus) {
+		Optional<AccountDetails> accDetails = accDetailsrepository.findById(accountnumber);
+		System.out.println(accDetails.get());
+		accDetails.get().setAccountStatus(accountstatus);
+		return accDetails.get();
+	}
 }

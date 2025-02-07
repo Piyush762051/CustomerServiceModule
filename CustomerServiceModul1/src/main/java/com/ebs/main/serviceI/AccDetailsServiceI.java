@@ -21,7 +21,7 @@ public interface AccDetailsServiceI
 
 	public AccountDetails ongetSingleCustomer(long accountno);
 
-	public AccountDetails setAccountNumber(long accountnumber, AccountStatus accountstatus);
+	public AccountDetails onsetAccountNumber(long accountnumber, AccountStatus accountstatus);
 
 
 

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -65,7 +66,7 @@ public class AccDetailsController
 			                                     )
 	{
 		
-	AccountDetails	accDetRef=serviceI.setAccountNumber(accountnumber,accountstatus);
+	AccountDetails	accDetRef=serviceI.onsetAccountNumber(accountnumber,accountstatus);
 		return new ResponseEntity<AccountDetails>(accDetRef,HttpStatus.CREATED);
 		
 	}
