@@ -6,12 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ebs.main.enm.AccountStatus;
 import com.ebs.main.model.AccountDetails;
 import com.ebs.main.model.AccountHolderDetails;
 import com.ebs.main.serviceI.AccDetailsServiceI;
@@ -45,6 +50,22 @@ public class AccDetailsController
 			Iterable<AccountDetails> accRef=serviceI.displayAccount();
 			return new ResponseEntity<Iterable<AccountDetails>>(accRef, HttpStatus.OK);
 	}
+	
+	
+	@PatchMapping("/upDateAcc/{accountNumber}/{accountStatus}")
+	public ResponseEntity<AccountDetails> onsetAccount(@PathVariable("accountNumber") long accountnumber,
+			                                           @PathVariable("accountStatus") AccountStatus accountstatus
+			                                     )
+	{
+		
+	AccountDetails	accDetRef=serviceI.setAccountNumber(accountnumber,accountstatus);
+		return new ResponseEntity<AccountDetails>(accDetRef,HttpStatus.CREATED);
+		
+	}
+	
+	
+	
+	
 	
 	
 }

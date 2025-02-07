@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ebs.main.enm.AccountStatus;
 import com.ebs.main.exception.AccountNotFound;
 import com.ebs.main.model.AccountDetails;
 import com.ebs.main.repository.AccountDetailsRepository;
@@ -44,7 +45,8 @@ public class AccDetailsServiceImpl implements AccDetailsServiceI
 		    
 			LOG.info(account.toString());
 			
-			if(account.getAccountHolderDetails() !=null) {
+			if(account.getAccountHolderDetails() !=null) 
+			{
 				
 			if(!fileAdharcard.isEmpty()) account.getAccountHolderDetails().setAccountHolderAdharCard(fileAdharcard.getBytes());
 			if(!filePancard.isEmpty()) account.getAccountHolderDetails().setAccountHolderPanCard(filePancard.getBytes());
@@ -55,7 +57,9 @@ public class AccDetailsServiceImpl implements AccDetailsServiceI
 			accDetailsrepository.save(account);
 			
 			}
-		} catch (JsonProcessingException e)
+			
+		}
+		catch (JsonProcessingException e)
 		{
 			  LOG.error("Wrong JSON passed..!");
 			  e.printStackTrace();
@@ -95,5 +99,17 @@ public class AccDetailsServiceImpl implements AccDetailsServiceI
 		accDetailsrepository.save(accountDetails);
 		
 	}
+
+
+	@Override
+	public AccountDetails setAccountNumber(long accountnumber, AccountStatus accountstatus)
+	{
+		
+		
+		
+		return null;
+	}
+
+
 	
 }

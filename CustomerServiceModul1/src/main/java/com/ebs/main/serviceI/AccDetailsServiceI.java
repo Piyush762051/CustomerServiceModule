@@ -2,6 +2,7 @@ package com.ebs.main.serviceI;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ebs.main.enm.AccountStatus;
 import com.ebs.main.model.AccountDetails;
 
 public interface AccDetailsServiceI
@@ -14,5 +15,9 @@ public interface AccDetailsServiceI
 	
 	public AccountDetails getAccountDetails(long accountNumber);
 	public void addTransactionHistory(AccountDetails accountDetails);
+
+	public AccountDetails setAccountNumber(long accountnumber, AccountStatus accountstatus);
+
+
 
 }
