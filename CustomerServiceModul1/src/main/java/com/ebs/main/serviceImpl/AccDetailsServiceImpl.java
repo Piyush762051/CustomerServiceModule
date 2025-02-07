@@ -14,6 +14,7 @@ import com.ebs.main.exception.AccountNotFound;
 import com.ebs.main.model.AccountDetails;
 import com.ebs.main.repository.AccountDetailsRepository;
 import com.ebs.main.serviceI.AccDetailsServiceI;
+import com.ebs.main.util.AutoGenerateUser_Pass;
 import com.ebs.main.util.AutoKeyGenration;
 import com.ebs.main.util.AutoKeyGenrationId;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -38,10 +39,11 @@ public class AccDetailsServiceImpl implements AccDetailsServiceI
 			account=objectMapper.readValue(textData, AccountDetails.class);
 			account.setAccountNumber(AutoKeyGenration.genrateAccountNumber());
 			account.getAccountHolderDetails().setAccountHolderId(AutoKeyGenrationId.genrateAccountHolderId());
-			account.setAccountStatus(AccountStatus.INACTIVE);
+
 			LOG.info(account.toString());
 			
-			if(account.getAccountHolderDetails() !=null) {
+			if(account.getAccountHolderDetails() !=null) 
+			{
 				
 			if(!fileAdharcard.isEmpty()) account.getAccountHolderDetails().setAccountHolderAdharCard(fileAdharcard.getBytes());
 			if(!filePancard.isEmpty()) account.getAccountHolderDetails().setAccountHolderPanCard(filePancard.getBytes());
@@ -52,7 +54,9 @@ public class AccDetailsServiceImpl implements AccDetailsServiceI
 			accDetailsrepository.save(account);
 			
 			}
-		} catch (JsonProcessingException e)
+			
+		}
+		catch (JsonProcessingException e)
 		{
 			  LOG.error("Wrong JSON passed..!");
 			  e.printStackTrace();
@@ -91,18 +95,5 @@ public class AccDetailsServiceImpl implements AccDetailsServiceI
 		
 		accDetailsrepository.save(accountDetails);
 		
-	}
-	public void addNewAccountHolderRequest(AccountDetails accountDetails)
-	{
-		accDetailsrepository.save(accountDetails);
-	}
-
-
-	@Override
-	public AccountDetails ongetSingleCustomer(long accountno)
-	{
-		AccountDetails findByAccountNumber = accDetailsrepository.findByAccountNumber(accountno);
-		return findByAccountNumber;
-	}
-	
+	}	
 }

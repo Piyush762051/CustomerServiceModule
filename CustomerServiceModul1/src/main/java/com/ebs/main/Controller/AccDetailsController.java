@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ebs.main.enm.AccountStatus;
 import com.ebs.main.model.AccountDetails;
 import com.ebs.main.model.AccountHolderDetails;
 import com.ebs.main.serviceI.AccDetailsServiceI;
@@ -34,8 +37,8 @@ public class AccDetailsController
             @RequestPart ("aAdharCard") MultipartFile fileAdharcard,
             @RequestPart("aPanCard") MultipartFile filePancard,
             @RequestPart ("aPhoto") MultipartFile filePhoto,
-            @RequestPart ("aJoinLetter") MultipartFile fileJoinLetter,
-            @RequestPart ("aSalarySlip") MultipartFile fileSalarySlip)
+            @RequestPart (value = "aJoinLetter",required = false) MultipartFile fileJoinLetter,
+            @RequestPart (value ="aSalarySlip",required = false) MultipartFile fileSalarySlip)
 	{
 		
 		AccountDetails accountDetailRef=serviceI.saveAccount(textData,fileAdharcard,filePancard,filePhoto,fileJoinLetter,fileSalarySlip);
@@ -55,8 +58,16 @@ public class AccDetailsController
 		AccountDetails data=serviceI.ongetSingleCustomer(accountno);
 		return new ResponseEntity<AccountDetails>(data,HttpStatus.OK);
 	}
-	
-	
-	
-	
+
+	@PatchMapping("/upDateAcc/{accountNumber}/{accountStatus}")
+	public ResponseEntity<AccountDetails> onsetAccount(@PathVariable("accountNumber") long accountnumber,
+			                                           @PathVariable("accountStatus") AccountStatus accountstatus
+			                                     )
+	{
+		
+	AccountDetails	accDetRef=serviceI.setAccountNumber(accountnumber,accountstatus);
+		return new ResponseEntity<AccountDetails>(accDetRef,HttpStatus.CREATED);
+		
+	}
+  
 }
